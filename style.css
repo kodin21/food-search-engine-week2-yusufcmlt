@@ -1,0 +1,224 @@
+/* BASE  */
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+}
+:root {
+  --color-primary: #fadb7e;
+  --color-primary-header: rgba(250, 219, 126, 0.95);
+  --color-primary-card: rgba(250, 219, 126, 0.5);
+  --color-secondary: #504b64;
+}
+
+/* LOADING ANIMATION AND  ICON  */
+
+@keyframes loading {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.loading__icon {
+  width: 20rem;
+  animation: loading 3s linear infinite;
+}
+.loading__text {
+  font-size: 2rem;
+  margin-top: 5rem;
+}
+
+/* HEADER */
+
+.header {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+
+  grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+
+  height: 100vh;
+
+  padding: 3rem;
+  background-color: var(--color-primary-header);
+  position: relative;
+}
+.header::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-image: url("/src/img/food-background.jpg");
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+.header__greet {
+  width: 70%;
+}
+.header__heading {
+  color: var(--color-secondary);
+  font-size: 4.5rem;
+  font-weight: 300;
+  text-align: center;
+}
+.header__heading--username {
+  font-weight: 500;
+}
+.header__image-container {
+  width: 50%;
+}
+.header__image {
+  width: 100%;
+  height: auto;
+}
+
+.header__search-container {
+  display: flex;
+
+  margin-top: 5rem;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+.header__search-input {
+  flex: 0 0 90%;
+  border: none;
+  padding: 2rem 1rem;
+
+  font-family: inherit;
+}
+.header__search-input:focus {
+  outline: none;
+}
+
+.search__suggestions {
+  display: none;
+  width: 100%;
+  position: absolute;
+  list-style: none;
+  font-size: 1.3rem;
+  background-color: #fff;
+
+  padding: 2rem 1rem;
+  top: 6.1rem;
+}
+
+.header__search-submit {
+  flex: 0 0 10%;
+  border: none;
+
+  background-color: #fff;
+  background-image: url("./src/img/icons/search.svg");
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+.header__search-submit:hover {
+  background-color: var(--color-primary-header);
+}
+.header__search-submit:active {
+  transform: translateY(2px);
+}
+
+/* RESULTS */
+
+.search__results__section {
+  display: grid;
+  grid-template-rows: min-content min-content;
+  justify-items: center;
+
+  margin-top: 5rem;
+}
+
+.search__results__heading {
+  display: block;
+  grid-row: 1 / span 1;
+
+  font-size: 2rem;
+}
+.search__results__container {
+  width: 100%;
+  padding: 5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 45rem));
+  justify-content: center;
+  gap: 3rem;
+}
+.result__card {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0px 0.5rem 1rem rgba(0, 0, 0, 0.2);
+
+  color: var(--color-secondary);
+}
+
+.result__card--selected {
+  color: #000 !important;
+}
+.result__card--selected::before {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+}
+.result__card::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary-card);
+  position: absolute;
+}
+
+.card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card__heading {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  font-size: 3.5rem;
+  width: 50%;
+}
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 1024px) {
+  html {
+    font-size: 55%;
+  }
+
+  .header__greet {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .header__image-container {
+    order: -1;
+  }
+}
