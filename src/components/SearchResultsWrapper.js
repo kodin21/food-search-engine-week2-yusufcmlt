@@ -2,11 +2,17 @@ import loadingIcon from "../img/icons/pizza-loading.svg";
 import { getFoodData } from "../services/api-service";
 import foodCard from "./FoodCard";
 
-const resultsSection = document.getElementsByTagName("SECTION");
+export default function searchResultsWrapper(searchTerm = "") {
+  const resultsSection = document.querySelector("SECTION");
+  const headerElement = document.getElementById("JSheader");
 
-export default function searchResultsWrapper(insertAfter, searchTerm = "") {
+  //Clear latest search results on re-render (or search)
+  if (resultsSection) {
+    resultsSection.remove();
+  }
+
   //Create a search results section right after header element.
-  insertAfter.insertAdjacentHTML(
+  headerElement.insertAdjacentHTML(
     "afterend",
     `<section class="search__results__section">
         <h2 id="JSsearchResultHeader" class="search__results__heading">
@@ -29,28 +35,22 @@ export default function searchResultsWrapper(insertAfter, searchTerm = "") {
   const resultsContainer = document.getElementById("JSsearchResultContainer");
 
   //Scroll into results when section created
-  //resultsSection.scrollIntoView(true);
+  resultsContainer.scrollIntoView();
 
   //Try to get food data then render results
-
   getFoodData(searchTerm)
     .then(({ meals }) => {
-      console.log(meals);
+      //Create a food card component with given food data.
       const resultsHTML = meals.reduce((foodCards, meal) => {
         return (foodCards += foodCard(meal));
       }, ``);
-      resultsContainer.innerHTML = resultsHTML;
-      resultsHeader.textContent = `Found ${meals.length} meal(s)`;
+      //ADDING A TIMEOUT JUST FOR VISUALS BECAUSE SOMETIMES YOU CANT EVEN SEE LOADING COMPONENT.
+      setTimeout(() => {
+        resultsContainer.innerHTML = resultsHTML;
+        resultsHeader.textContent = `Found ${meals.length} meal(s)`;
+      }, 500);
     })
     .catch((error) => {
       console.log(error);
     });
 }
-
-//Remove section if user searches a new item(food).
-function removeResults() {
-  if (resultsSection) {
-    resultsSection.remove();
-  }
-}
-export { removeResults };
