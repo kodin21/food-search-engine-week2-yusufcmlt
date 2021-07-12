@@ -9,14 +9,15 @@ import {
   removeSuggestionsList,
 } from "./SearchSuggestions";
 
-export default function headerGreet(rootHeader, userName = "Human") {
+export default function headerWrapper(rootHeader, userName = "Human") {
   rootHeader.innerHTML = `<div class="header__greet">
     <h1 class="header__heading">
       Hello <span class="header__heading--username">${userName}!</span>
     </h1>
     <form id="JSformElement" class="header__search-container">
       <input
-      autocomplete="off"
+        required
+        autocomplete="off"
         id="JSsearchInput"
         name="searchInput"
         type="text"
@@ -54,8 +55,8 @@ export default function headerGreet(rootHeader, userName = "Human") {
   async function handleSearch() {
     //There is only one input (search box) so we don't need select value-
     //- with event target etc.
-    const value = searchInput.value;
-    const modifiedSearch = modifySearch(value);
+
+    const modifiedSearch = modifySearch(searchInput.value);
 
     //if search box has a value -and not only empty spaces-
     if (modifiedSearch) {
@@ -81,10 +82,17 @@ export default function headerGreet(rootHeader, userName = "Human") {
       removeSuggestionsList();
     }
   }
-}
 
-//Searching
-//Clicking a suggestion or typing and entering
-async function handleSubmit(event) {
-  event.preventDefault();
+  //Searching
+  //Clicking a suggestion or typing and entering
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const modifiedSearch = modifySearch(searchInput.value);
+
+    if (modifiedSearch) {
+    } else {
+      searchInput.value = "";
+    }
+  }
 }
