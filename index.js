@@ -1,5 +1,5 @@
 import "regenerator-runtime/runtime";
-import headerGreet from "./src/components/HeaderGreet";
+import headerWrapper from "./src/components/HeaderWrapper";
 import Loading from "./src/components/Loading";
 import { getUserName, getFoodData } from "./src/services/api-service";
 
@@ -16,9 +16,9 @@ const randomUserID = Math.floor(Math.random() * 10) + 1; //Random user id every 
 setTimeout(() => {
   getUserName(randomUserID)
     .then((data) => {
-      headerGreet(headerElement, data.name);
+      headerWrapper(headerElement, data.name);
     })
     .catch(() => {
-      headerGreet(headerElement);
+      headerWrapper(headerElement);
     });
 }, 600);
