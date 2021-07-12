@@ -1,11 +1,15 @@
 import loadingIcon from "../img/icons/pizza-loading.svg";
 import { getFoodData } from "../services/api-service";
 import foodCard from "./FoodCard";
+import { clearInput } from "./HeaderWrapper";
 
 export default function searchResultsWrapper(searchTerm = "") {
   const resultsSection = document.querySelector("SECTION");
   const headerElement = document.getElementById("JSheader");
+  const searchInput = document.getElementById("JSsearchInput");
 
+  //Clear search input if results section render
+  searchInput.value = "";
   //Clear latest search results on re-render (or search)
   if (resultsSection) {
     resultsSection.remove();
@@ -24,7 +28,7 @@ export default function searchResultsWrapper(searchTerm = "") {
                     alt="loading icon"
                     class="loading__icon"
                 />
-            <h2 class="loading__text">Yükleniyor...</h3>
+            <h2 class="loading__text">Loading...</h3>
             </div>
         </div>
   </section>`
@@ -40,14 +44,22 @@ export default function searchResultsWrapper(searchTerm = "") {
   //Try to get food data then render results
   getFoodData(searchTerm)
     .then(({ meals }) => {
-      //Create a food card component with given food data.
-      const resultsHTML = meals.reduce((foodCards, meal) => {
-        return (foodCards += foodCard(meal));
-      }, ``);
       //ADDING A TIMEOUT JUST FOR VISUALS BECAUSE SOMETIMES YOU CANT EVEN SEE LOADING COMPONENT.
       setTimeout(() => {
-        resultsContainer.innerHTML = resultsHTML;
-        resultsHeader.textContent = `Found ${meals.length} meal(s)`;
+        //Create a food card component with given food data.
+        if (meals) {
+          const resultsHTML = meals.reduce((foodCards, meal) => {
+            return (foodCards += foodCard(meal));
+          }, ``);
+
+          //Check If there are any search results exist
+
+          resultsContainer.innerHTML = resultsHTML;
+          resultsHeader.textContent = `Found ${meals.length} meal(s)`;
+        } else {
+          resultsContainer.innerHTML =
+            '<h2 class="search__results__heading search__results__heading--error">Couldn\'t find any matches.</h2>';
+        }
       }, 500);
     })
     .catch((error) => {
