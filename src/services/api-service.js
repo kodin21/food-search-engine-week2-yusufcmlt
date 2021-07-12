@@ -12,7 +12,7 @@ const getUserName = async (userID = "1") => {
   }
 };
 
-const getFoodSuggestions = async (searchTerm) => {
+const getFoodData = async (searchTerm) => {
   try {
     const response = await axios.get(`${MEAL_API_URL}${searchTerm}`);
     return response.data;
@@ -21,6 +21,4 @@ const getFoodSuggestions = async (searchTerm) => {
   }
 };
 
-const getFoodData = async (searchTerm) => {};
-
-export { getUserName, getFoodSuggestions, getFoodData };
+export { getUserName, getFoodData };

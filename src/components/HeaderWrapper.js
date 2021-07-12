@@ -2,7 +2,7 @@
 //Gets user name and renders greeting message with image and search box.
 
 import mealPlateImg from "../img/food-bowl-header.png";
-import { getFoodSuggestions } from "../services/api-service";
+import { getFoodData } from "../services/api-service";
 import { debounce } from "../services/utils";
 import {
   createSuggestionsList,
@@ -61,7 +61,7 @@ export default function headerWrapper(rootHeader, userName = "Human") {
     //if search box has a value -and not only empty spaces-
     if (modifiedSearch) {
       //Get search results
-      const suggestionData = await getFoodSuggestions(modifiedSearch);
+      const suggestionData = await getFoodData(modifiedSearch);
       const { meals } = suggestionData;
 
       //Check if response data has any results
