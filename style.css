@@ -188,6 +188,10 @@ body {
   grid-row: 1 / span 1;
 
   font-size: 2rem;
+  text-align: center;
+}
+.search__results__heading--error {
+  font-size: 3rem !important;
 }
 .search__results__container {
   width: 100%;
