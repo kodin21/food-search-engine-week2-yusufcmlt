@@ -179,6 +179,8 @@ body {
   justify-items: center;
 
   margin-top: 5rem;
+
+  min-height: 65rem;
 }
 
 .search__results__heading {
