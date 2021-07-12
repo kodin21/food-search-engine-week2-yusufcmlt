@@ -1,6 +1,7 @@
 import "regenerator-runtime/runtime";
 import headerWrapper from "./src/components/HeaderWrapper";
 import Loading from "./src/components/Loading";
+import searchResultsWrapper from "./src/components/SearchResultsWrapper";
 import { getUserName, getFoodData } from "./src/services/api-service";
 
 //Selecting elements
@@ -22,3 +23,5 @@ setTimeout(() => {
       headerWrapper(headerElement);
     });
 }, 600);
+
+//searchResultsWrapper(headerElement, "corba");
