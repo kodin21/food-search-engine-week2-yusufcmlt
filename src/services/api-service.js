@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const USER_API_URL = "https://jsonplaceholder.typicode.com/users/";
-const MEAL_API_URL = "www.themealdb.com/api/json/v1/1/search.php?s=";
+const MEAL_API_URL = "https://themealdb.com/api/json/v1/1/search.php?s=";
 
 const getUserName = async (userID = "1") => {
   try {
@@ -12,6 +12,15 @@ const getUserName = async (userID = "1") => {
   }
 };
 
-const getFoodData = async () => {};
+const getFoodSuggestions = async (searchTerm) => {
+  try {
+    const response = await axios.get(`${MEAL_API_URL}${searchTerm}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export { getUserName, getFoodData };
+const getFoodData = async (searchTerm) => {};
+
+export { getUserName, getFoodSuggestions, getFoodData };
