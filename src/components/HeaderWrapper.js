@@ -4,6 +4,7 @@
 import mealPlateImg from "../img/food-bowl-header.png";
 import { getFoodData } from "../services/api-service";
 import { debounce } from "../services/utils";
+import searchResultsWrapper from "./SearchResultsWrapper";
 import {
   createSuggestionsList,
   removeSuggestionsList,
@@ -91,6 +92,7 @@ export default function headerWrapper(rootHeader, userName = "Human") {
     const modifiedSearch = modifySearch(searchInput.value);
 
     if (modifiedSearch) {
+      searchResultsWrapper(modifiedSearch);
     } else {
       searchInput.value = "";
     }
