@@ -21,8 +21,11 @@ function createSuggestionsList(suggestionRoot, suggestionItems) {
   suggestionRoot.appendChild(suggestionsList);
 }
 
+//Removing suggestion box
 function removeSuggestionsList() {
-  suggestionsList.remove();
+  if (suggestionsList) {
+    suggestionsList.remove();
+  }
 }
 
 export { createSuggestionsList, removeSuggestionsList };
