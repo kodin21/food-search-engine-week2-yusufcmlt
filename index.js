@@ -1,5 +1,4 @@
 import "regenerator-runtime/runtime";
-import elementCreator from "./src/components/ElementCreator";
 import headerGreet from "./src/components/HeaderGreet";
 import Loading from "./src/components/Loading";
 import { getUserName, getFoodData } from "./src/services/api-service";
@@ -12,9 +11,14 @@ const headerElement = document.getElementById("JSheader"); //header inside body 
 Loading(headerElement);
 
 //Get User data and remove loading
-//Added 1 second just for showing loading animation because it gets data fast.
+//Added 1 second timeout just for showing loading animation because it gets data fast and you can't see the loading.
+const randomUser = Math.floor(Math.random() * 10) + 1; //Random user every time document loads (user id  1-10)
 setTimeout(() => {
-  getUserName().then((data) => {
-    headerGreet(headerElement, data.name);
-  });
+  getUserName(randomUser)
+    .then((data) => {
+      headerGreet(headerElement, data.name);
+    })
+    .catch(() => {
+      headerGreet(headerElement);
+    });
 }, 1000);
