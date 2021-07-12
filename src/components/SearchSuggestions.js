@@ -1,6 +1,7 @@
 //Search suggestions with given suggestion array.
 //Inserts right after search box that contained by form
 let suggestionsList = document.getElementById("JSsuggestionsList");
+document.addEventListener("click", handleCloseDropdown);
 
 function createSuggestionsList(suggestionRoot, suggestionItems) {
   if (suggestionsList) {
@@ -21,10 +22,17 @@ function createSuggestionsList(suggestionRoot, suggestionItems) {
   suggestionRoot.appendChild(suggestionsList);
 }
 
-//Removing suggestion box
+//Remove suggestion box
 function removeSuggestionsList() {
   if (suggestionsList) {
     suggestionsList.remove();
+  }
+}
+
+//Close dropdown suggestions box on clicking anywhere but the box itself
+function handleCloseDropdown(event) {
+  if (suggestionsList && event.target !== suggestionsList) {
+    removeSuggestionsList();
   }
 }
 
