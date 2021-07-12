@@ -1,4 +1,7 @@
 //Search suggestions with given suggestion array.
+
+import searchResultsWrapper from "./SearchResultsWrapper";
+
 //Inserts right after search box that contained by form
 let suggestionsList = document.getElementById("JSsuggestionsList");
 document.addEventListener("click", handleCloseDropdown);
@@ -15,8 +18,13 @@ function createSuggestionsList(suggestionRoot, suggestionItems) {
   );
   suggestionsList.setAttribute("id", "JSsuggestionsList");
 
+  //Create a suggestion list component using given suggestion data
   suggestionItems.forEach((item) => {
     suggestionsList.innerHTML += `<li class="suggestion">${item}</li>`;
+  });
+  //Add a click event to every suggestion list element.
+  suggestionsList.querySelectorAll("li").forEach((listElement) => {
+    listElement.addEventListener("click", handleSuggestionClick);
   });
 
   suggestionRoot.appendChild(suggestionsList);
@@ -34,6 +42,13 @@ function handleCloseDropdown(event) {
   if (suggestionsList && event.target !== suggestionsList) {
     removeSuggestionsList();
   }
+}
+
+function handleSuggestionClick(event) {
+  removeSuggestionsList();
+  const { textContent } = event.target;
+
+  searchResultsWrapper(textContent);
 }
 
 export { createSuggestionsList, removeSuggestionsList };
