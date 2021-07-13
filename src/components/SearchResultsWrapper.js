@@ -48,14 +48,14 @@ export default function searchResultsWrapper(searchTerm = "") {
       setTimeout(() => {
         //Create a food card component with given food data.
         if (meals) {
-          const resultsHTML = meals.reduce((foodCards, meal) => {
-            return (foodCards += foodCard(meal));
-          }, ``);
-
-          //Check If there are any search results exist
-
-          resultsContainer.innerHTML = resultsHTML;
+          //Remove loading animation then change heading
+          resultsContainer.innerHTML = "";
           resultsHeader.textContent = `Found ${meals.length} meal(s)`;
+
+          //Append every meal card into results container;
+          meals.forEach((meal) => {
+            resultsContainer.appendChild(foodCard(meal));
+          });
         } else {
           resultsContainer.innerHTML =
             '<h2 class="search__results__heading search__results__heading--error">Couldn\'t find any matches.</h2>';
