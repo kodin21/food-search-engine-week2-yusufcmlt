@@ -1,8 +1,9 @@
 import "regenerator-runtime/runtime";
 import headerWrapper from "./src/components/HeaderWrapper";
 import Loading from "./src/components/Loading";
-import searchResultsWrapper from "./src/components/SearchResultsWrapper";
+
 import { getUserName, getFoodData } from "./src/services/api-service";
+import { addLocalFavItem, favData, getLocalData } from "./src/services/utils";
 
 //Selecting elements
 const headerElement = document.getElementById("JSheader"); //header inside body   ==> search will be inside and results will be inserted after.
@@ -24,4 +25,12 @@ setTimeout(() => {
     });
 }, 600);
 
-//searchResultsWrapper(headerElement, "corba");
+/**
+ * HeaderWrapper.js handles searching part.
+ * SearchSuggestions.js for showing suggestion box.
+ * SearchResultsWrapper.js is for showing results it gets from header inputs.
+ * FoodCard.js renders a meal/food card item.
+ *
+ * utils.js handles debounce and localStorage functions
+ * api-service.js describes itself.
+ */
