@@ -3,7 +3,11 @@ import { getFoodData } from "../services/api-service";
 import foodCard from "./FoodCard";
 import { clearInput } from "./HeaderWrapper";
 
-export default function searchResultsWrapper(searchTerm = "") {
+export default function searchResultsWrapper(
+  searchTerm = "",
+  favoriteItems = []
+) {
+  //Selecting elements
   const resultsSection = document.querySelector("SECTION");
   const headerElement = document.getElementById("JSheader");
   const searchInput = document.getElementById("JSsearchInput");
@@ -41,28 +45,40 @@ export default function searchResultsWrapper(searchTerm = "") {
   //Scroll into results when section created
   resultsContainer.scrollIntoView();
 
-  //Try to get food data then render results
-  getFoodData(searchTerm)
-    .then(({ meals }) => {
-      //ADDING A TIMEOUT JUST FOR VISUALS BECAUSE SOMETIMES YOU CANT EVEN SEE LOADING COMPONENT.
-      setTimeout(() => {
-        //Create a food card component with given food data.
-        if (meals) {
-          //Remove loading animation then change heading
-          resultsContainer.innerHTML = "";
-          resultsHeader.textContent = `Found ${meals.length} meal(s)`;
+  //Create food cards with given meal list. ---> Favorite list or results of api call
+  function createFoodCards(mealList) {
+    //ADDING A TIMEOUT JUST FOR VISUALS BECAUSE SOMETIMES YOU CANT EVEN SEE LOADING COMPONENT.
+    setTimeout(() => {
+      //Create a food card component with given food data.
+      if (mealList && mealList.length) {
+        //Remove loading animation then change heading
+        resultsContainer.innerHTML = "";
+        resultsHeader.textContent = `Found ${mealList.length} meal(s)`;
 
-          //Append every meal card into results container;
-          meals.forEach((meal) => {
-            resultsContainer.appendChild(foodCard(meal));
-          });
-        } else {
-          resultsContainer.innerHTML =
-            '<h2 class="search__results__heading search__results__heading--error">Couldn\'t find any matches.</h2>';
-        }
-      }, 500);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+        //Append every meal card into results container;
+        mealList.forEach((meal) => {
+          resultsContainer.appendChild(foodCard(meal));
+        });
+      } else {
+        resultsContainer.innerHTML =
+          '<h2 class="search__results__heading search__results__heading--error">Couldn\'t find any matches.</h2>';
+      }
+    }, 500);
+  }
+
+  //User searching
+  if (searchTerm) {
+    //Try to get food data then render results
+    getFoodData(searchTerm)
+      .then(({ meals }) => {
+        createFoodCards(meals);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  //User listing favorite items. Not searching
+  else {
+    createFoodCards(favoriteItems);
+  }
 }
