@@ -1,7 +1,7 @@
 //This component is for showing a placeholder while getting/rendering any data.
 //Just for visuals, has no functional purpose
 //Styles in style.css
-import elementCreator from "./ElementCreator";
+
 import loadingIcon from "../img/icons/pizza-loading.svg";
 
 function Loading(insertedRoot) {
