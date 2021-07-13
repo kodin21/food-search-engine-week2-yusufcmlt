@@ -170,6 +170,27 @@ body {
 .header__search-submit:active {
   transform: translateY(2px);
 }
+.header__favorite-link {
+  width: 40%;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 1rem;
+  background-color: var(--color-secondary);
+  color: white;
+  text-align: center;
+  margin-left: auto;
+  margin-top: 1rem;
+
+  transition: 0.2s;
+  cursor: pointer;
+}
+.header__favorite-link:hover {
+  background-color: white;
+  color: var(--color-secondary);
+}
+.header__favorite-link:active {
+  transform: translateY(2px);
+}
 
 /* RESULTS */
 
@@ -264,6 +285,8 @@ body {
 }
 
 /* MEDIA QUERIES */
+
+/* TABLET */
 @media only screen and (max-width: 64em) {
   html {
     font-size: 55%;
@@ -273,13 +296,17 @@ body {
     width: 100%;
   }
 }
-
+/* PHONES */
 @media only screen and (max-width: 42.5em) {
   .loading {
     padding: 0;
   }
   .header__greet {
     z-index: 1;
+  }
+
+  .header__favorite-link {
+    width: 100%;
   }
   .header__image-container {
     order: -1;

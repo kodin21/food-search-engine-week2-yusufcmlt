@@ -3,7 +3,7 @@
 
 import mealPlateImg from "../img/food-bowl-header.png";
 import { getFoodData } from "../services/api-service";
-import { debounce } from "../services/utils";
+import { debounce, getLocalData } from "../services/utils";
 import searchResultsWrapper from "./SearchResultsWrapper";
 import {
   createSuggestionsList,
@@ -26,8 +26,9 @@ export default function headerWrapper(rootHeader, userName = "Human") {
         class="header__search-input"
       />
 
-      <button class="header__search-submit" />
+      <button class="header__search-submit"></button>
     </form>
+    <p id="JSfavoriteLink" class="header__favorite-link">My favorite meals</p>
   </div>
   <div class="header__image-container">
     <img
@@ -40,11 +41,13 @@ export default function headerWrapper(rootHeader, userName = "Human") {
   //Selecting search box input and form element.
   const formElement = document.getElementById("JSformElement");
   const searchInput = document.getElementById("JSsearchInput");
+  const favoriteLink = document.getElementById("JSfavoriteLink");
 
   //Typing in search box
   //Debounce ---->   Delay the api call until user stops typing.
   searchInput.addEventListener("input", debounce(handleSearch));
   formElement.addEventListener("submit", handleSubmit);
+  favoriteLink.addEventListener("click", handleGetFavorites);
 
   //Modifying input for api
   //Hello world -----> 'hello+world'
@@ -96,5 +99,9 @@ export default function headerWrapper(rootHeader, userName = "Human") {
     } else {
       searchInput.value = "";
     }
+  }
+
+  function handleGetFavorites() {
+    searchResultsWrapper("", getLocalData());
   }
 }
