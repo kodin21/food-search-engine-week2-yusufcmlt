@@ -10,7 +10,7 @@ import createSearchForm from "./searchForm";
  *
  * Kullanici heading --->h1
  * Arama formu  ---> searchForm.js --createSearchForm();
- * Favorileri getir butonu --->getFavoritesButton.js
+ * Favorileri getir butonu --->getFavoritesButton.js --createFavoriteButton()
  *
  */
 
@@ -25,8 +25,8 @@ export default function createHeaderContent(userName) {
     </h1>
   `;
 
-  //Olusturulan markupi html elemanina cevir.
-  const userHeading = parseHTML(headerMarkup);
+  //Olusturulan elemanlar
+  const userHeading = parseHTML(headerMarkup); //Markupu cevirir
   const searchForm = createSearchForm();
   const favoriteButton = createFavoriteButton();
 
