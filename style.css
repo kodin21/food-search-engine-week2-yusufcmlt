@@ -11,6 +11,7 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -210,6 +211,7 @@ body {
 .search__results__heading {
   display: block;
   grid-row: 1 / span 1;
+  text-align: center;
 
   font-size: 2rem;
 }
