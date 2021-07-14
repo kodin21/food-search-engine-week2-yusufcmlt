@@ -15,13 +15,22 @@
   </head>
   <body>
     <header id="JSheader" class="header">
-      <div class="loading">
+      <div id="JSheaderGreet" class="header__greet">
+        <div class="loading">
+          <img
+            src="./src/img/icons/pizza-loading.svg"
+            alt="loading icon"
+            class="loading__icon"
+          />
+          <h2 class="loading__text">Yükleniyor...</h2>
+        </div>
+      </div>
+      <div class="header__image-container">
         <img
-          src="./src/img/icons/pizza-loading.svg"
-          alt="loading icon"
-          class="loading__icon"
+          src="./src/img/food-bowl-header.png"
+          alt="food plate"
+          class="header__image"
         />
-        <h2 class="loading__text">Yükleniyor...</h2>
       </div>
     </header>
     <section id="JSsearchResults" class="search__results__section">
