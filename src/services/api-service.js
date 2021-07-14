@@ -17,6 +17,7 @@ const getUser = async (userID) => {
 //Aslinda promise olmasinin hicbir anlami yok sadece deneme amacli eklendi.
 const fuse = new Fuse(mealsList, {
   keys: ["strMeal"],
+  threshold: 0.45,
 });
 const fuzzySearch = async (searchTerm, resultLimit) => {
   return await fuse.search(searchTerm, { limit: resultLimit });
