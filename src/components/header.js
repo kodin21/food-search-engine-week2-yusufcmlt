@@ -1,33 +1,39 @@
 import headerImage from "../img/food-bowl-header.png";
+import { parseHTML } from "../services/utils";
+import createFavoriteButton from "./getFavoritesButton";
+import createSearchForm from "./searchForm";
 
-export default function createHeader(headerRoot, userName) {
-  //Gelen bilgiyle olusturulacak header icerigi
-  //Form bilgisi searchForm bileseninden gelecek.
-  const headerInnerMarkup = `<div class="header__greet">
+//Gelen bilgiyle olusturulacak header icerigi
+
+/**
+ * Icerik:
+ *
+ * Kullanici heading --->h1
+ * Arama formu  ---> searchForm.js --createSearchForm();
+ * Favorileri getir butonu --->getFavoritesButton.js
+ *
+ */
+
+export default function createHeaderContent(userName) {
+  //Header icerisinden karsilama containerini sec.
+  const headerContainer = document.getElementById("JSheaderGreet");
+
+  //Gelen kullanici isim bilgisiyle olusturulan markup
+  const headerMarkup = `
     <h1 class="header__heading">
       Merhaba <span class="header__heading--username">${userName}!</span>
     </h1>
-    <form class="header__search-container">
-      <input
-        type="text"
-        placeholder="Aklındaki yemeği ara"
-        class="header__search-input"
-      />
+  `;
 
-      <button class="header__search-submit" />
-    </form>
-  </div>
-  <div class="header__image-container">
-    <img
-      src="${headerImage}"
-      alt="food plate"
-      class="header__image"
-    />
-  </div>`;
+  //Olusturulan markupi html elemanina cevir.
+  const userHeading = parseHTML(headerMarkup);
+  const searchForm = createSearchForm();
+  const favoriteButton = createFavoriteButton();
 
   //Olusturulan header icerigini verilen root icerisinde loading yerine yerlestir.
-  //BURAYA SIRF LOADING BIRAZ DAHA GORUNSUN DIYE SETTIMEOUT EKLIYORUM 600ms
+  //BURAYA SIRF LOADING BIRAZ DAHA UZUN SURE GORUNSUN DIYE SETTIMEOUT EKLIYORUM 600ms (datayi hizli cekiyor)
   setTimeout(() => {
-    headerRoot.innerHTML = headerInnerMarkup;
+    headerContainer.innerHTML = "";
+    headerContainer.append(userHeading, searchForm, favoriteButton);
   }, 600);
 }
