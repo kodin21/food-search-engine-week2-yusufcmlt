@@ -27,7 +27,7 @@ export default function createSearchForm() {
 
   //Arama kutusunda girilen terimlere gore oneri getirilmesi
   async function handleGetSuggestions(event) {
-    console.log(event.target.value);
+    //yemek listesinde fuzzy arama yap
     fuzzySearch(event.target.value).then((mealData) => {
       //Sadece ilk 5 oneriyi getir.
       mealData = mealData.slice(0, 5);
