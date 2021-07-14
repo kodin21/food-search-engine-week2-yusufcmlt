@@ -15,7 +15,7 @@ const loadHeader = async () => {
   const userData = await getUser(randomUserID);
 
   //Gelen kullanici ismi ile headeri olustur.
-  createHeader(headerElement, userData.name);
+  createHeader(userData.name);
 };
 
 //Sayfa yuklenme durumunda headeri getir.
