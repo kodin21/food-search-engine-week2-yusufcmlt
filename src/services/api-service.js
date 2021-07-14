@@ -14,10 +14,12 @@ const getUser = async (userID) => {
 
 //Fuse.js ile fuzzy arama yapma
 //mealsmin.js icerisinde yemek isimlerinden arama yapma
-const fuse = new Fuse(mealsList, { keys: ["strMeal"] });
-const fuzzySearch = async (searchTerm) => {
-  const resultData = await fuse.search(searchTerm);
-  return resultData;
+//Aslinda promise olmasinin hicbir anlami yok sadece deneme amacli eklendi.
+const fuse = new Fuse(mealsList, {
+  keys: ["strMeal"],
+});
+const fuzzySearch = async (searchTerm, resultLimit) => {
+  return await fuse.search(searchTerm, { limit: resultLimit });
 };
 
 export { getUser, fuzzySearch };
