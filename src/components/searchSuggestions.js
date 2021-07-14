@@ -10,12 +10,18 @@ import { parseHTML } from "../services/utils";
  */
 
 export default function createSuggestionList(searchResultList) {
-  const suggestionListMarkup = ` <ul class="search__suggestions"></ul>`;
+  //Eski listeyi (eger varsa) sil
+  const oldSuggestionsList = document.getElementById("JSsuggestionsList");
+  if (oldSuggestionsList) {
+    oldSuggestionsList.remove();
+  }
+
+  const suggestionListMarkup = ` <ul id="JSsuggestionsList" class="search__suggestions"></ul>`;
   const suggestionListElement = parseHTML(suggestionListMarkup);
 
   //Gelen listeye gore bir liste elemani olustur
-  searchResultList.forEach((listItem) => {
-    suggestionListElement.appendChild(createSuggestionElement(listItem));
+  searchResultList.forEach(({ item }) => {
+    suggestionListElement.appendChild(createSuggestionElement(item.strMeal));
   });
 
   return suggestionListElement;
