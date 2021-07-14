@@ -15,7 +15,7 @@ export default function createSuggestionList(searchResultList) {
   if (oldSuggestionsList) {
     oldSuggestionsList.remove();
   }
-
+  //Liste container olusturulmasi
   const suggestionListMarkup = ` <ul id="JSsuggestionsList" class="search__suggestions"></ul>`;
   const suggestionListElement = parseHTML(suggestionListMarkup);
 
