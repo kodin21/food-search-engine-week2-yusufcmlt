@@ -1,5 +1,6 @@
 import { fuzzySearch } from "../services/api-service";
 import { debounce, parseHTML } from "../services/utils";
+import createSearchResult from "./searchResults";
 
 import createSuggestionList from "./searchSuggestions";
 
@@ -21,24 +22,42 @@ export default function createSearchForm() {
 
   //Elemanlara event ekleme
   //Arama kismina yazma durumunda debounce uygula
-  //Arama tusuna basma veya enter durumunda sonuclari renderla
+  //Arama form submit durumunda sonuclari renderla
   formElement.addEventListener("submit", handleSubmitSearch);
   searchInput.addEventListener("input", debounce(handleGetSuggestions));
 
   //Arama kutusunda girilen terimlere gore oneri getirilmesi
   async function handleGetSuggestions(event) {
-    //yemek listesinde fuzzy arama yap
-    fuzzySearch(event.target.value).then((mealData) => {
-      //Sadece ilk 5 oneriyi getir.
-      mealData = mealData.slice(0, 5);
-
-      formElement.appendChild(createSuggestionList(mealData));
-    });
+    const searchTerm = event.target.value;
+    if (checkSearchTerm(searchTerm)) {
+      //yemek listesinde fuzzy arama yap (sonuc limiti:5 yemek)
+      fuzzySearch(searchTerm, 5).then((mealList) => {
+        //Gelen oneri listesiyle arama kutusu altinda oneri kutusu olustur.
+        formElement.appendChild(createSuggestionList(mealList));
+      });
+    }
   }
 
+  //Arama kutusunun gonderilmesi durumu.
+  //Fuzzy searchden gelen bilgilerin sonuc sayfasinda render edilmesi.
   function handleSubmitSearch(event) {
     event.preventDefault();
+    const searchTerm = searchInput.value;
+
+    if (checkSearchTerm(searchTerm)) {
+      //Yemek listesinde arama (sonuc limiti:15 yemek)
+      fuzzySearch(searchTerm, 15).then((mealList) => {
+        createSearchResult(mealList);
+      });
+    }
   }
 
   return formElement;
 }
+
+//Gonderilen arama kelimesinin bos veya sadece space karakterinden olusup olusmadiginin kontrolu
+//Boolean
+const checkSearchTerm = (searchTerm) => {
+  searchTerm = searchTerm.trim();
+  return !!searchTerm;
+};
