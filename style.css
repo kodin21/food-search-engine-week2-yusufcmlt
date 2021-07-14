@@ -175,6 +175,7 @@ body {
   justify-items: center;
 
   margin-top: 5rem;
+  display: none;
 }
 
 .search__results__heading {
