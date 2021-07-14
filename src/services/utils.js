@@ -1,3 +1,6 @@
+import mealsList from "./mealsmin.js";
+import Fuse from "fuse.js";
+
 //Yardimci fonksiyonlar vb
 
 //Verilen string ile element olustur.
@@ -8,4 +11,12 @@ const parseHTML = (htmlStr) => {
   return templateDoc.body.firstChild;
 };
 
-export { parseHTML };
+//Fuse.js ile fuzzy arama yapma
+//mealsmin.js icerisinde yemek isimlerinden arama yapma
+
+const fuse = new Fuse(mealsList, { keys: ["strMeal"] });
+const fuzzySearch = (searchTerm) => {
+  return fuse.search(searchTerm);
+};
+
+export { parseHTML, fuzzySearch };
