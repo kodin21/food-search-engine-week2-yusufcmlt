@@ -8,6 +8,7 @@ export default function createSearchForm() {
   const formMarkup = `
   <form class="header__search-container">
     <input
+      required
       type="text"
       placeholder="Aklındaki yemeği ara"
       class="header__search-input"
@@ -35,6 +36,9 @@ export default function createSearchForm() {
         //Gelen oneri listesiyle arama kutusu altinda oneri kutusu olustur.
         formElement.appendChild(createSuggestionList(mealList));
       });
+    } else {
+      //Bos arama veya silinme durumunda onerileri bosalt
+      formElement.appendChild(createSuggestionList([]));
     }
   }
 
@@ -48,6 +52,8 @@ export default function createSearchForm() {
       //Yemek listesinde arama (sonuc limiti:15 yemek)
       fuzzySearch(searchTerm, 15).then((mealList) => {
         createSearchResult(mealList);
+        searchInput.value = "";
+        searchInput.blur();
       });
     }
   }
