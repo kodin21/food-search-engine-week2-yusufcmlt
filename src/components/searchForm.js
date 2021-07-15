@@ -7,6 +7,7 @@ import createSuggestionList, {
 } from "./searchSuggestions";
 
 export default function createSearchForm() {
+  //Formun genel markupu
   const formMarkup = `
   <form class="header__search-container">
     <input
