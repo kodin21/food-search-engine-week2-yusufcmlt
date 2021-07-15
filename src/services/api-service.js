@@ -14,7 +14,7 @@ const getUser = async (userID) => {
 
 //Fuse.js ile fuzzy arama yapma
 //mealsmin.js icerisinde yemek isimlerinden arama yapma
-//Aslinda promise olmasinin hicbir anlami yok sadece deneme amacli eklendi.
+//Aslinda async olmasinin hicbir anlami yok sadece deneme amacli eklendi.
 const fuse = new Fuse(mealsList, {
   keys: ["strMeal"],
   threshold: 0.45,
