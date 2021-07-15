@@ -27,8 +27,8 @@ export default function createSearchResult(mealList) {
 
   //Yemek listesinde eleman varsa sonuc containera ekle
   if (mealList.length) {
-    mealList.forEach(({ item }) => {
-      resultContainerElement.appendChild(createMealCard(item));
+    mealList.forEach((meal) => {
+      resultContainerElement.appendChild(createMealCard(meal));
     });
   }
 }
