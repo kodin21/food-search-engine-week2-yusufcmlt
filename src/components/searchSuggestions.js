@@ -19,8 +19,8 @@ export default function createSuggestionList(searchResultList) {
   const suggestionListElement = parseHTML(suggestionListMarkup);
 
   //Gelen listeye gore bir liste elemani olustur
-  searchResultList.forEach(({ item }) => {
-    suggestionListElement.appendChild(createSuggestionElement(item.strMeal));
+  searchResultList.forEach((meal) => {
+    suggestionListElement.appendChild(createSuggestionElement(meal.strMeal));
   });
 
   return suggestionListElement;
@@ -40,13 +40,10 @@ function createSuggestionElement(suggestionName) {
   function handleGetSuggestedMeal(event) {
     //Onerilen yemek ismini al
     const searchTerm = event.target.textContent;
-
     //Sadece onerilen yemegi gosterecek sekilde arama yap
-    fuzzySearch(searchTerm, 1).then((meal) => {
-      createSearchResult(meal);
-      searchInput.value = "";
-      removeSuggestionList();
-    });
+    createSearchResult(fuzzySearch(searchTerm, 1));
+    searchInput.value = "";
+    removeSuggestionList();
   }
 
   return suggestionElement;
