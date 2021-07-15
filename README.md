@@ -5,6 +5,7 @@
 #### Demo:
 
 - Projenin calisir haline [buradan ulasabilirsiniz.](https://food-search-week2-yusufcmlt.netlify.app/)
+  - Not: demo uzerinde bazen gorseller yuklenmiyor/yavas yukleniyor. Favori ikonu bazen hic yuklenmeyebiliyor. Netlify tarafinda bir sorun :(
 
 #### Genel:
 
