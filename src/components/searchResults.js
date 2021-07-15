@@ -16,7 +16,7 @@ export default function createSearchResult(mealList) {
   //Sonuc listeleme durumunda ekrani sonuc bolumune kaydir.
   setTimeout(() => {
     searchResultsSection.scrollIntoView();
-  }, 200);
+  }, 400);
 
   //Sonuc icerisinde loading animasyonunu kaldir
   searchResultsSection.innerHTML = "";
