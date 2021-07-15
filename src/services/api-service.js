@@ -14,13 +14,26 @@ const getUser = async (userID) => {
 
 //Fuse.js ile fuzzy arama yapma
 //mealsmin.js icerisinde yemek isimlerinden arama yapma
-//Aslinda async olmasinin hicbir anlami yok sadece deneme amacli eklendi.
+
 const fuse = new Fuse(mealsList, {
   keys: ["strMeal"],
   threshold: 0.45,
 });
-const fuzzySearch = async (searchTerm, resultLimit) => {
-  return await fuse.search(searchTerm, { limit: resultLimit });
+const fuzzySearch = (searchTerm, resultLimit) => {
+  let fuzzyResult = fuse.search(searchTerm, { limit: resultLimit });
+  //Gelen sonuclar item: isminde key icerisinde geliyor onu duzeltiyorum
+  fuzzyResult = fuzzyResult.reduce((resultArr, { item }) => {
+    return [
+      ...resultArr,
+      {
+        idMeal: item.idMeal,
+        strMeal: item.strMeal,
+        strMealThumb: item.strMealThumb,
+      },
+    ];
+  }, []);
+
+  return fuzzyResult;
 };
 
 export { getUser, fuzzySearch };
