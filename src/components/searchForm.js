@@ -2,7 +2,9 @@ import { fuzzySearch } from "../services/api-service";
 import { debounce, parseHTML } from "../services/utils";
 import createSearchResult from "./searchResults";
 
-import createSuggestionList from "./searchSuggestions";
+import createSuggestionList, {
+  removeSuggestionList,
+} from "./searchSuggestions";
 
 export default function createSearchForm() {
   const formMarkup = `
@@ -52,8 +54,9 @@ export default function createSearchForm() {
       //Yemek listesinde arama (sonuc limiti:15 yemek)
       fuzzySearch(searchTerm, 15).then((mealList) => {
         createSearchResult(mealList);
+        //Arama cubugundaki odaklanmayi ve arama terimini kaldir.
         searchInput.value = "";
-        searchInput.blur();
+        removeSuggestionList();
       });
     }
   }
