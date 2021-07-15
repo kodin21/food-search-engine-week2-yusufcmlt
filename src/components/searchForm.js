@@ -22,7 +22,6 @@ export default function createSearchForm() {
   //Form ici elemanlarin secimi
   const formElement = parseHTML(formMarkup);
   const searchInput = formElement.querySelector("input");
-  const searchButton = formElement.querySelector("button");
 
   //Elemanlara event ekleme
   //Arama kismina yazma durumunda debounce uygula
@@ -35,10 +34,8 @@ export default function createSearchForm() {
     const searchTerm = event.target.value;
     if (checkSearchTerm(searchTerm)) {
       //yemek listesinde fuzzy arama yap (sonuc limiti:5 yemek)
-      fuzzySearch(searchTerm, 5).then((mealList) => {
-        //Gelen oneri listesiyle arama kutusu altinda oneri kutusu olustur.
-        formElement.appendChild(createSuggestionList(mealList));
-      });
+      //Gelen oneri listesiyle arama kutusu altinda oneri kutusu olustur.
+      formElement.appendChild(createSuggestionList(fuzzySearch(searchTerm, 5)));
     } else {
       //Bos arama veya silinme durumunda onerileri bosalt
       formElement.appendChild(createSuggestionList([]));
@@ -53,12 +50,12 @@ export default function createSearchForm() {
 
     if (checkSearchTerm(searchTerm)) {
       //Yemek listesinde arama (sonuc limiti:15 yemek)
-      fuzzySearch(searchTerm, 15).then((mealList) => {
-        createSearchResult(mealList);
-        //oneri listesini ve arama terimini kaldir.
-        searchInput.value = "";
-        removeSuggestionList();
-      });
+
+      createSearchResult(fuzzySearch(searchTerm, 15));
+      //oneri listesini ve arama terimini kaldir.
+
+      searchInput.value = "";
+      removeSuggestionList();
     }
   }
 
