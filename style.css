@@ -130,9 +130,9 @@ body {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
 }
 
-.header__search-container:not(:focus-within) .search__suggestions {
+/* .header__search-container:not(:focus-within) .search__suggestions {
   visibility: hidden;
-}
+} */
 
 .header__favorite-link {
   border: none;
