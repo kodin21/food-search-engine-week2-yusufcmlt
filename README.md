@@ -11,6 +11,7 @@
 
 - Yemek listesi icin [TheMealDB](https://www.themealdb.com/api.php) kullanildi.
 - Fuse.js icin yemek listesi json dosyasina cevirildi.
+  - Oncesinde yemek listesi de api uzerinden aliniyordu. Ancak suanki haliyle proje icerisindeki jsondan kullanilmakta.
 - Kullanici listesi verilen api uzerinden aliniyor.
 
 #### Karsilanan gereksinimler:
