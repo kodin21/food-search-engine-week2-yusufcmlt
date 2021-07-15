@@ -54,7 +54,7 @@ export default function createSearchForm() {
       //Yemek listesinde arama (sonuc limiti:15 yemek)
       fuzzySearch(searchTerm, 15).then((mealList) => {
         createSearchResult(mealList);
-        //Arama cubugundaki odaklanmayi ve arama terimini kaldir.
+        //oneri listesini ve arama terimini kaldir.
         searchInput.value = "";
         removeSuggestionList();
       });
