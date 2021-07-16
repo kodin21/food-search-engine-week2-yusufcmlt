@@ -10,12 +10,15 @@ export default function createSearchForm() {
   //Formun genel markupu
   const formMarkup = `
   <form class="header__search-container">
+    
     <input
+      id="JSsearchInput" 
       required
       type="text"
-      placeholder="Aklındaki yemeği ara"
       class="header__search-input"
+      placeholder=""
     />
+    <label class="header__search-label" for="JSsearchInput">Aklındaki yemeği ara...</label>
     <button class="header__search-submit" />
 </form>`;
 
